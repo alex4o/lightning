@@ -89,7 +89,40 @@ typedef union {
 	ui imm10_1	: 10;
 	ui imm20	: 1;
     } J;
-    jit_int32_t		w;
+	struct {
+	ui opcode   : 7;
+    ui rd       : 5;
+	ui func3    : 3;
+	ui rs1      : 5;
+	ui imm5     : 5;
+	ui func7    : 7; 
+	} CheriSrcDst;
+	struct {
+	ui opcode   : 7;
+	ui rd       : 5;
+	ui funct3   : 3; 
+	ui rs1      : 5;
+	ui imm5     : 5;
+	ui funct7   : 7;
+	} CheriSCR;
+	struct {
+	ui opcode   : 7;
+	ui funct5   : 5
+	ui funct3	: 3;
+	ui rs1		: 5;
+	ui rs2		: 5;
+	ui funct7	: 7;
+	} CheriTwoSrc; 
+	struct {
+	ui opcode   : 7;
+    ui mask0    : 5;
+	ui func3    : 3;
+	ui maks1    : 3;
+	ui quarter  : 2;
+	ui funct5   : 5;
+	ui funct7   : 7;
+	} CheriClear;
+	jit_int32_t		w;
 #  undef ui
 } instr_t;
 #  define ii(i)				*_jit->pc.ui++ = i
